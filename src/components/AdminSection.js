@@ -98,6 +98,8 @@ export default class UserSection extends Component {
                           </TableCell>
                         </TableRow>
                       );
+                    } else {
+                      return null;
                     }
                   })
                 : ""}

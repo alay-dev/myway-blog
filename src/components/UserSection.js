@@ -12,9 +12,6 @@ import {
 } from "@material-ui/core";
 
 export default class UserSection extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.get_all_users(this.props.login);
   }
@@ -106,6 +103,8 @@ export default class UserSection extends Component {
                           </TableCell>
                         </TableRow>
                       );
+                    } else {
+                      return null;
                     }
                   })
                 : ""}

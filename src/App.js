@@ -10,10 +10,6 @@ import firebaseConfig from "./config/firebaseConfig";
 import firebase from "firebase";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     firebase.initializeApp(firebaseConfig);
   }

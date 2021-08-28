@@ -10,7 +10,7 @@ import {
   set_post_img,
   set_post_main_text,
   set_post_old_img,
-  set_post_tags,
+  // set_post_tags,
   get_all_posts,
   delete_post,
   update_post,

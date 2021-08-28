@@ -16,7 +16,7 @@ import {
   set_snackbar_serverity,
   set_snackbar_status,
 } from "../snackbar/snackbarActions";
-import { logout } from "../login/loginActions";
+// import { logout } from "../login/loginActions";
 
 export function get_all_comment() {
   return (dispatch) => {

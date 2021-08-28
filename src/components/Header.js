@@ -5,19 +5,19 @@ import {
   Menu,
   MenuItem,
   Drawer,
-  Accordion,
-  Typography,
-  AccordionSummary,
-  AccordionDetails,
+  // Accordion,
+  // Typography,
+  // AccordionSummary,
+  // AccordionDetails,
   Dialog,
-  Input,
+  // Input,
   InputAdornment,
   IconButton,
-  InputLabel,
+  // InputLabel,
   FilledInput,
 } from "@material-ui/core";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
@@ -68,10 +68,10 @@ export default class Header extends Component {
       set_user_confirm_password,
       set_user_contact_num,
       set_user_email,
-      set_user_img,
+      // set_user_img,
       set_user_name,
       set_user_password,
-      loader,
+      // loader,
       set_user_campus_id,
       do_login,
       logout,

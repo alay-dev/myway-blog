@@ -5,13 +5,12 @@ import {
   Card,
   CardActions,
   CardContent,
-  Typography,
   Button,
   CardMedia,
   CardActionArea,
   Divider,
 } from "@material-ui/core";
-import img from "../img/1.jpeg";
+
 import moment from "moment";
 import "../css/home.css";
 

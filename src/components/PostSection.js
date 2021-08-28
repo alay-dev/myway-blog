@@ -31,11 +31,10 @@ export default class PostSection extends Component {
   }
   render() {
     const {
-      user,
       post,
       login,
       add_post,
-      set_post_author,
+
       set_post_heading,
       set_post_img,
       set_post_main_text,

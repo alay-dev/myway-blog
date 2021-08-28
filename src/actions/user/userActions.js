@@ -1,7 +1,7 @@
-import { logout, reset_user, set_login } from "../login/loginActions";
+import { logout, reset_user } from "../login/loginActions";
 import {
   SET_ALL_USER,
-  RESET_USER,
+  // RESET_USER,
   SET_USER_CONFIRM_PASSWORD,
   SET_USER_CONTACT_NUM,
   SET_USER_CURRENT_PASSWORD,
@@ -23,7 +23,7 @@ import firebase from "firebase";
 import {
   set_update_profile_loader,
   set_delete_loader,
-  set_like_loader,
+  // set_like_loader,
   set_update_password_loader,
   unset_update_password_loader,
   unset_update_profile_loader,

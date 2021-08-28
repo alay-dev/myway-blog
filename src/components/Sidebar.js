@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { Avatar, Divider } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 
 export default class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     console.log(this.props.section);
   }
