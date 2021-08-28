@@ -84,6 +84,7 @@ export default function reducer(state = initial_state, action) {
         author_img: "",
         author_id: "",
         main_text: "",
+        heading: "",
       });
     default:
       return state;

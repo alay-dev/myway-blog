@@ -10,6 +10,8 @@ import {
   CardActionArea,
   Divider,
 } from "@material-ui/core";
+// import Snackbar from "../components/Snackbar";
+import Loader from "../containers/loader/loaderCont";
 
 import moment from "moment";
 import "../css/home.css";
@@ -69,6 +71,8 @@ export default class Home extends Component {
         <div style={{ marginTop: "2rem " }} className="pagination__cont">
           <Pagination count={4} shape="rounded" />
         </div>
+        <Loader {...this.props} />
+        {/* <Snackbar {...this.props} /> */}
       </div>
     );
   }

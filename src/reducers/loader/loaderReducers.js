@@ -18,7 +18,7 @@ import {
 } from "../../constants/loader/loaderConst";
 
 const initial_state = {
-  all_posts_loader: false,
+  all_loader: false,
   post_loader: false,
   comment_loader: false,
   like_loader: false,
@@ -31,25 +31,25 @@ const initial_state = {
 export default function reducer(state = initial_state, action) {
   switch (action.type) {
     case SET_ALL_POSTS_LOADER:
-      return (state = { ...state, all_posts_loader: true });
+      return (state = { ...state, all_loader: true });
     case UNSET_ALL_POSTS_LOADER:
-      return (state = { ...state, all_posts_loader: false });
+      return (state = { ...state, all_loader: false });
     case SET_POST_LOADER:
-      return (state = { ...state, post_loader: true });
+      return (state = { ...state, all_loader: true });
     case UNSET_POST_LOADER:
-      return (state = { ...state, post_loader: false });
+      return (state = { ...state, all_loader: false });
     case SET_COMMENT_LOADER:
-      return (state = { ...state, comment_loader: true });
+      return (state = { ...state, all_loader: true });
     case UNSET_COMMENT_LOADER:
-      return (state = { ...state, comment_loader: false });
+      return (state = { ...state, all_loader: false });
     case SET_LIKE_LOADER:
       return (state = { ...state, like_loader: true });
     case UNSET_LIKE_LOADER:
       return (state = { ...state, like_loader: false });
     case SET_LOGIN_LOADER:
-      return (state = { ...state, login_loader: true });
+      return (state = { ...state, all_loader: true });
     case UNSET_LOGIN_LOADER:
-      return (state = { ...state, login_loader: false });
+      return (state = { ...state, all_loader: false });
     case SET_UPDATE_PROFILE_LOADER:
       return (state = { ...state, update_profile_loader: true });
     case UNSET_UPDATE_PROFILE_LOADER:

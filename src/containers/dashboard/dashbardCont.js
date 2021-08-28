@@ -14,6 +14,7 @@ import {
   get_all_posts,
   delete_post,
   update_post,
+  reset_post,
 } from "../../actions/posts/postActions";
 
 class DashboardCont extends Component {
@@ -66,6 +67,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     delete_post: (id) => {
       dispatch(delete_post(id));
+    },
+    reset_post: () => {
+      dispatch(reset_post());
     },
   };
 };

@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Loader from "../containers/loader/loaderCont";
 import moment from "moment";
 import img from "../img/1.jpeg";
 import Logo from "../img/logo.png";
@@ -113,6 +114,7 @@ export default class Post extends Component {
             Add Comment
           </Button>
         </div>
+        <Loader {...this.props} />
       </div>
     );
   }

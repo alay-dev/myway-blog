@@ -34,7 +34,7 @@ export default class PostSection extends Component {
       post,
       login,
       add_post,
-
+      reset_post,
       set_post_heading,
       set_post_img,
       set_post_main_text,
@@ -170,7 +170,10 @@ export default class PostSection extends Component {
           </Table>
         </TableContainer>
         <Dialog
-          onClose={() => this.setState({ post_dialog: false })}
+          onClose={() => {
+            this.setState({ post_dialog: false });
+            reset_post();
+          }}
           aria-labelledby="simple-dialog-title"
           open={this.state.post_dialog}
         >
@@ -208,6 +211,7 @@ export default class PostSection extends Component {
               //   style={{ backgroundColor: "#3c5a5f", color: "#eee" }}
               onClick={() => {
                 this.setState({ post_dialog: false });
+                reset_post();
               }}
             >
               {" "}
@@ -218,6 +222,7 @@ export default class PostSection extends Component {
               onClick={() => {
                 this.setState({ post_dialog: false });
                 add_post(post, login);
+                reset_post();
               }}
             >
               {" "}
@@ -226,7 +231,10 @@ export default class PostSection extends Component {
           </DialogActions>
         </Dialog>
         <Dialog
-          onClose={() => this.setState({ post_edit_dialog: false })}
+          onClose={() => {
+            this.setState({ post_edit_dialog: false });
+            reset_post();
+          }}
           aria-labelledby="simple-dialog-title"
           open={this.state.post_edit_dialog}
         >
@@ -264,6 +272,7 @@ export default class PostSection extends Component {
               //   style={{ backgroundColor: "#3c5a5f", color: "#eee" }}
               onClick={() => {
                 this.setState({ post_edit_dialog: false });
+                reset_post();
               }}
             >
               {" "}
@@ -274,6 +283,7 @@ export default class PostSection extends Component {
               onClick={() => {
                 this.setState({ post_edit_dialog: false });
                 update_post(this.state.selecte_post, post, login);
+                reset_post();
               }}
             >
               {" "}

@@ -17,6 +17,7 @@ import {
   FilledInput,
 } from "@material-ui/core";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import Loader from "../containers/loader/loaderCont";
 
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -180,11 +181,17 @@ export default class Header extends Component {
             <Button
               className="btn__secondary"
               variant="outlined"
-              onClick={() => this.setState({ login_modal: true })}
+              onClick={() =>
+                this.setState({ login_modal: true, drawer: false })
+              }
             >
               Log in
             </Button>
-            <Button className="btn__primary" variant="contained">
+            <Button
+              className="btn__primary"
+              variant="contained"
+              onClick={{ register_modal: true, drawer: false }}
+            >
               Register
             </Button>
             {/* <Accordion
@@ -418,6 +425,7 @@ export default class Header extends Component {
             <p>Already have an account? Login</p>
           </div>
         </Dialog>
+        <Loader {...this.props} />
       </div>
     );
   }

@@ -229,6 +229,7 @@ export function update_post_api(id, post, login, url) {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.status === "success") {
+          dispatch(reset_post());
           dispatch(get_all_posts());
         } else {
           if (responseJson.message === "User does not exist") {
