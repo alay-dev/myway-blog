@@ -35,12 +35,6 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    set_user_email: (email) => {
-      dispatch(set_user_email(email));
-    },
-    set_user_password: (password) => {
-      dispatch(set_user_password(password));
-    },
     do_login: (user) => {
       dispatch(do_login(user));
     },
@@ -74,16 +68,9 @@ const mapDispatchToProps = (dispatch) => {
     set_user_confirm_password: (confirm_password) => {
       dispatch(set_user_confirm_password(confirm_password));
     },
-    set_reload_login: (login) => {
-      dispatch(set_reload_login(login));
-    },
-    set_snackbar_status: (status) => {
-      dispatch(set_snackbar_status(false));
-    },
     set_user_campus_id: (id) => {
       dispatch(set_user_campus_id(id));
     },
-
     add_admin: (user) => {
       dispatch(add_admin(user));
     },
