@@ -1,0 +1,102 @@
+.post {
+  padding: 1rem 8rem;
+  min-height: 100vh;
+}
+
+.post .goback__cont {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  color: blueviolet;
+}
+
+.post__grid {
+  padding: 1rem 12rem;
+}
+
+.post__grid h1 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.post__img {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.post__grid .logo__cont img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.post__grid .logo__cont p {
+  color: #000;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.post__caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post__main {
+  font-size: 1.1rem;
+  line-height: 2rem;
+}
+
+.tags__cont {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.tags__cont p {
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.like__comment {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  color: grey;
+  margin-top: 3rem;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+.like__comment--sec {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1000px) {
+  .post__grid {
+    padding: 1rem 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .post {
+    padding: 1rem;
+  }
+
+  .post__caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .post__grid h1 {
+    font-size: 1.6rem;
+  }
+}

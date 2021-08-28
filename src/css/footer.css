@@ -1,0 +1,32 @@
+.footer {
+  padding: 1rem 7rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: #3c5a5f;
+}
+
+.logo__cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo__cont p {
+  margin: 0;
+  color: #eee;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer__left--bottom {
+  display: flex;
+  gap: 1rem;
+  color: #eee;
+}
+
+@media only screen and (max-width: 1000px) {
+  .footer {
+    padding: 1rem;
+  }
+}
