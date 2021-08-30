@@ -14,6 +14,7 @@ import {
 const UserSection = (props) => {
   useEffect(() => {
     props.get_all_users(props.login);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { user } = props;

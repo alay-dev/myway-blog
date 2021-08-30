@@ -18,6 +18,7 @@ import "../css/post.css";
 const Post = (props) => {
   useEffect(() => {
     props.get_post_by_id(props.match.params.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { login, post, comment, set_comment, add_comment } = props;
   return (

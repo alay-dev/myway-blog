@@ -42,6 +42,7 @@ const Header = (props) => {
         JSON.parse(localStorage.getItem("mywayblog_login"))
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClickShowPassword = () => {

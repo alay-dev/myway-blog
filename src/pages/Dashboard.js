@@ -10,6 +10,7 @@ const Dashboard = (props) => {
   const [section, setSection] = useState("post");
   useEffect(() => {
     props.get_all_users(props.login);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

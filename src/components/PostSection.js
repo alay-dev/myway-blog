@@ -24,6 +24,7 @@ const PostSection = (props) => {
 
   useEffect(() => {
     props.get_all_posts(props.login);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {

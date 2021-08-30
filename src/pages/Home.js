@@ -19,6 +19,7 @@ import "../css/home.css";
 const Home = (props) => {
   useEffect(() => {
     props.get_all_posts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { post } = props;
