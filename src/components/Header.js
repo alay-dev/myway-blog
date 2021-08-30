@@ -27,12 +27,12 @@ import "../css/header.css";
 
 const Header = (props) => {
   const [student_status, setStudentStatus] = useState(false);
-  const [employer, setEmployer] = useState(false);
-  const [business, setBusiness] = useState(false);
+  // const [employer, setEmployer] = useState(false);
+  // const [business, setBusiness] = useState(false);
   const [el, setEl] = useState(null);
   const [drawer, setDrawer] = useState(false);
   const [login_modal, setLoginModal] = useState(false);
-  const [edit_modal, setEditModal] = useState(false);
+  // const [edit_modal, setEditModal] = useState(false);
   const [visible, setVisible] = useState(false);
   const [register_modal, setRegisterModal] = useState(false);
 
@@ -50,8 +50,8 @@ const Header = (props) => {
 
   const handleClose = () => {
     setStudentStatus(false);
-    setEmployer(false);
-    setBusiness(false);
+    // setEmployer(false);
+    // setBusiness(false);
   };
 
   const {
@@ -419,7 +419,7 @@ const Header = (props) => {
             onClick={() => {
               signup(user);
 
-              setEditModal(false);
+              setRegisterModal(false);
             }}
           >
             {" "}
