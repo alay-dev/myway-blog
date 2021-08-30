@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -25,176 +25,177 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Logo from "../img/logo.png";
 import "../css/header.css";
 
-export default class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      student_status: false,
-      employer: false,
-      business: false,
-      el: null,
-      drawer: false,
-      login_modal: false,
-      visible: false,
-      register_modal: false,
-    };
-  }
+const Header = (props) => {
+  const [student_status, setStudentStatus] = useState(false);
+  const [employer, setEmployer] = useState(false);
+  const [business, setBusiness] = useState(false);
+  const [el, setEl] = useState(null);
+  const [drawer, setDrawer] = useState(false);
+  const [login_modal, setLoginModal] = useState(false);
+  const [edit_modal, setEditModal] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [register_modal, setRegisterModal] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     if (localStorage.getItem("mywayblog_login")) {
-      this.props.set_reload_login(
+      props.set_reload_login(
         JSON.parse(localStorage.getItem("mywayblog_login"))
       );
     }
-  }
+  }, []);
 
-  handleClickShowPassword = () => {
-    this.setState({
-      visible: !this.state.visible,
-    });
+  const handleClickShowPassword = () => {
+    setVisible(!visible);
   };
 
-  handleClose = () => {
-    this.setState({
-      student_status: false,
-      employer: false,
-      business: false,
-    });
+  const handleClose = () => {
+    setStudentStatus(false);
+    setEmployer(false);
+    setBusiness(false);
   };
-  render() {
-    const {
-      user,
-      signup,
-      login,
-      set_user_confirm_password,
-      set_user_contact_num,
-      set_user_email,
-      // set_user_img,
-      set_user_name,
-      set_user_password,
-      // loader,
-      set_user_campus_id,
-      do_login,
-      logout,
-    } = this.props;
-    return (
-      <div className="header">
-        <Link to="/" style={{ textDecoration: "none", color: "#222" }}>
-          <div className="header__left">
-            <img src={Logo} alt="logo" />
-            <p>MyWays</p>
-          </div>
-        </Link>
 
-        <div className="header__right">
-          <i
-            className="fas fa-bars "
-            onClick={() => this.setState({ drawer: true })}
-          />
-          <ul>
-            <li
-              onClick={(e) => {
-                this.setState({ student_status: true, el: e.currentTarget });
-                console.log(this.state.el);
-              }}
-            >
-              For Students <ArrowDropDownIcon className="arrow" />
-            </li>
-            <Menu
-              id="simple-menu"
-              anchorEl={this.state.el}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              keepMounted
-              open={this.state.student_status}
-              onClose={this.handleClose}
-            >
-              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-              <MenuItem onClick={this.handleClose}>My account</MenuItem>
-              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-            </Menu>
+  const {
+    user,
+    signup,
+    login,
+    set_user_confirm_password,
+    set_user_contact_num,
+    set_user_email,
+    // set_user_img,
+    set_user_name,
+    set_user_password,
+    // loader,
+    set_user_campus_id,
+    do_login,
+    logout,
+  } = props;
+  return (
+    <div className="header">
+      <Link to="/" style={{ textDecoration: "none", color: "#222" }}>
+        <div className="header__left">
+          <img src={Logo} alt="logo" />
+          <p>MyWays</p>
+        </div>
+      </Link>
+
+      <div className="header__right">
+        <i className="fas fa-bars " onClick={() => setDrawer(true)} />
+        <ul>
+          <li
+            onClick={(e) => {
+              setStudentStatus(true);
+              setEl(e.currentTarget);
+            }}
+          >
+            For Students <ArrowDropDownIcon className="arrow" />
+          </li>
+          <Menu
+            id="simple-menu"
+            anchorEl={el}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            keepMounted
+            open={student_status}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Menu>
+          <li>
+            For Employers <ArrowDropDownIcon className="arrow" />
+          </li>
+          <li>
+            For Businesses <ArrowDropDownIcon className="arrow" />
+          </li>
+          {login.type === "A" ? (
+            <Link to="/dashboard">
+              <li>Dashboard</li>
+            </Link>
+          ) : (
+            ""
+          )}
+          {login._id ? (
             <li>
-              For Employers <ArrowDropDownIcon className="arrow" />
+              {" "}
+              <Button
+                className="btn__primary"
+                variant="contained"
+                onClick={() => logout()}
+              >
+                Log out
+              </Button>
             </li>
-            <li>
-              For Businesses <ArrowDropDownIcon className="arrow" />
-            </li>
-            {login.type === "A" ? (
-              <Link to="/dashboard">
-                <li>Dashboard</li>
-              </Link>
-            ) : (
-              ""
-            )}
-            {login._id ? (
+          ) : (
+            <React.Fragment>
+              <li>
+                <Button
+                  className="btn__secondary"
+                  variant="outlined"
+                  onClick={() => setLoginModal(true)}
+                >
+                  Log in
+                </Button>
+              </li>
               <li>
                 {" "}
                 <Button
                   className="btn__primary"
                   variant="contained"
-                  onClick={() => logout()}
+                  onClick={() => setRegisterModal(true)}
                 >
-                  Log out
+                  Register
                 </Button>
-              </li>
-            ) : (
-              <React.Fragment>
-                <li>
-                  <Button
-                    className="btn__secondary"
-                    variant="outlined"
-                    onClick={() => this.setState({ login_modal: true })}
-                  >
-                    Log in
-                  </Button>
-                </li>
-                <li>
-                  {" "}
-                  <Button
-                    className="btn__primary"
-                    variant="contained"
-                    onClick={() => this.setState({ register_modal: true })}
-                  >
-                    Register
-                  </Button>
-                </li>{" "}
-              </React.Fragment>
-            )}
-          </ul>
-        </div>
-        <Drawer
-          anchor="right"
-          open={this.state.drawer}
-          onClose={() => this.setState({ drawer: false })}
-        >
-          <div className="drawer__cont">
-            <i
-              className="far fa-times-circle"
-              onClick={() => this.setState({ drawer: false })}
-            />
-            <Button
-              className="btn__secondary"
-              variant="outlined"
-              onClick={() =>
-                this.setState({ login_modal: true, drawer: false })
-              }
-            >
-              Log in
-            </Button>
-            <Button
-              className="btn__primary"
-              variant="contained"
-              onClick={{ register_modal: true, drawer: false }}
-            >
-              Register
-            </Button>
-            {/* <Accordion
+              </li>{" "}
+            </React.Fragment>
+          )}
+        </ul>
+      </div>
+      <Drawer anchor="right" open={drawer} onClose={() => setDrawer(false)}>
+        <div className="drawer__cont">
+          <i className="far fa-times-circle" onClick={() => setDrawer(false)} />
+          {login._id ? (
+            <li>
+              {" "}
+              <Button
+                className="btn__primary"
+                variant="contained"
+                onClick={() => logout()}
+              >
+                Log out
+              </Button>
+            </li>
+          ) : (
+            <React.Fragment>
+              <Button
+                className="btn__secondary"
+                variant="outlined"
+                onClick={() => {
+                  setLoginModal(true);
+                  setDrawer(false);
+                }}
+              >
+                Log in
+              </Button>
+              <Button
+                className="btn__primary"
+                variant="contained"
+                onClick={() => {
+                  setRegisterModal(true);
+                  setDrawer(false);
+                }}
+              >
+                Register
+              </Button>
+            </React.Fragment>
+          )}
+          {/* <Accordion
               expanded={this.state.panel === 1}
               onChange={() => this.setState({ panel: 1 })}
             >
@@ -217,216 +218,219 @@ export default class Header extends Component {
                 </Typography>
               </AccordionDetails>
             </Accordion> */}
+        </div>
+      </Drawer>
+      <Dialog
+        onClose={() => setLoginModal(false)}
+        aria-labelledby="simple-dialog-title"
+        open={login_modal}
+      >
+        <div className="login__cont">
+          <h2 style={{ color: "#222", marginBottom: "3rem" }}>Login</h2>
+          <Button
+            style={{ marginBottom: "1rem" }}
+            variant="outlined"
+            color="secondary"
+            startIcon={<i className="fab fa-google" />}
+          >
+            Login with google
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={<i className="fab fa-linkedin" />}
+          >
+            Login with Linkedin
+          </Button>
+          <div className="divider__cont">
+            <p>OR</p>
           </div>
-        </Drawer>
-        <Dialog
-          onClose={() => this.setState({ login_modal: false })}
-          aria-labelledby="simple-dialog-title"
-          open={this.state.login_modal}
-        >
-          <div className="login__cont">
-            <h2 style={{ color: "#222", marginBottom: "3rem" }}>Login</h2>
-            <Button
-              style={{ marginBottom: "1rem" }}
-              variant="outlined"
-              color="secondary"
-              startIcon={<i className="fab fa-google" />}
-            >
-              Login with google
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              startIcon={<i className="fab fa-linkedin" />}
-            >
-              Login with Linkedin
-            </Button>
-            <div className="divider__cont">
-              <p>OR</p>
-            </div>
-            <FilledInput
-              style={{
-                width: "100%",
-                height: "2.5rem",
-                marginBottom: "0.6rem",
-              }}
-              placeholder="Email"
-              id="standard-adornment-email"
-              variant="filled"
-              type="text"
-              value={user.email}
-              onChange={(e) => set_user_email(e.target.value)}
-            />
-            <FilledInput
-              style={{ width: "100%", height: "2.5rem", marginBottom: "1rem" }}
-              placeholder="Password"
-              id="standard-adornment-password"
-              variant="filled"
-              type={this.state.visible ? "text" : "password"}
-              value={user.password}
-              onChange={(e) => set_user_password(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={this.handleClickShowPassword}
-                  >
-                    {this.state.visible ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            <Button
-              fullWidth
-              style={{ backgroundColor: "#3c5a5f", color: "#eee" }}
-              onClick={() => {
-                do_login(user);
-                this.setState({ login_modal: false });
-              }}
-            >
-              {" "}
-              Login
-            </Button>
-            <small>Forgot Your password?</small>
-            <p>Dont have an account yet? Register</p>
+          <FilledInput
+            style={{
+              width: "100%",
+              height: "2.5rem",
+              marginBottom: "0.6rem",
+            }}
+            placeholder="Email"
+            id="standard-adornment-email"
+            variant="filled"
+            type="text"
+            value={user.email}
+            onChange={(e) => set_user_email(e.target.value)}
+          />
+          <FilledInput
+            style={{ width: "100%", height: "2.5rem", marginBottom: "1rem" }}
+            placeholder="Password"
+            id="standard-adornment-password"
+            variant="filled"
+            type={visible ? "text" : "password"}
+            value={user.password}
+            onChange={(e) => set_user_password(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                >
+                  {visible ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+          <Button
+            fullWidth
+            style={{ backgroundColor: "#3c5a5f", color: "#eee" }}
+            onClick={() => {
+              do_login(user);
+              setLoginModal(false);
+            }}
+          >
+            {" "}
+            Login
+          </Button>
+          <small>Forgot Your password?</small>
+          <p>Dont have an account yet? Register</p>
+        </div>
+      </Dialog>
+      <Dialog
+        // className="scrollbar"
+        onClose={() => {
+          setRegisterModal(false);
+        }}
+        aria-labelledby="simple-dialog-title"
+        open={register_modal}
+      >
+        <div className="login__cont">
+          <h2 style={{ color: "#222", marginBottom: "3rem" }}>Register</h2>
+          <Button
+            style={{ marginBottom: "1rem" }}
+            variant="outlined"
+            color="secondary"
+            startIcon={<i className="fab fa-google" />}
+          >
+            Sign up with google
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={<i className="fab fa-linkedin" />}
+          >
+            Sign up with Linkedin
+          </Button>
+          <div className="divider__cont">
+            <p>OR</p>
           </div>
-        </Dialog>
-        <Dialog
-          // className="scrollbar"
-          onClose={() => this.setState({ register_modal: false })}
-          aria-labelledby="simple-dialog-title"
-          open={this.state.register_modal}
-        >
-          <div className="login__cont">
-            <h2 style={{ color: "#222", marginBottom: "3rem" }}>Register</h2>
-            <Button
-              style={{ marginBottom: "1rem" }}
-              variant="outlined"
-              color="secondary"
-              startIcon={<i className="fab fa-google" />}
-            >
-              Sign up with google
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              startIcon={<i className="fab fa-linkedin" />}
-            >
-              Sign up with Linkedin
-            </Button>
-            <div className="divider__cont">
-              <p>OR</p>
-            </div>
-            <FilledInput
-              style={{
-                width: "100%",
-                height: "2.5rem",
-                marginBottom: "0.6rem",
-              }}
-              placeholder="Full Name"
-              id="standard-adornment-email"
-              variant="filled"
-              type="text"
-              value={user.name}
-              onChange={(e) => set_user_name(e.target.value)}
-            />
-            <FilledInput
-              style={{
-                width: "100%",
-                height: "2.5rem",
-                marginBottom: "0.6rem",
-              }}
-              placeholder="Email"
-              id="standard-adornment-email"
-              variant="filled"
-              type="email"
-              value={user.email}
-              onChange={(e) => set_user_email(e.target.value)}
-            />
-            <FilledInput
-              style={{
-                width: "100%",
-                height: "2.5rem",
-                marginBottom: "0.6rem",
-              }}
-              placeholder="Phone Number"
-              id="standard-adornment-email"
-              variant="filled"
-              type="text"
-              value={user.contact_num}
-              onChange={(e) => set_user_contact_num(e.target.value)}
-            />
-            <FilledInput
-              style={{ width: "100%", height: "2.5rem", marginBottom: "1rem" }}
-              placeholder="Password"
-              id="standard-adornment-password"
-              variant="filled"
-              type={this.state.visible ? "text" : "password"}
-              value={user.password}
-              onChange={(e) => set_user_password(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={this.handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                  >
-                    {this.state.visible ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            <FilledInput
-              style={{ width: "100%", height: "2.5rem", marginBottom: "1rem" }}
-              placeholder="Confirm Password"
-              id="standard-adornment-password"
-              variant="filled"
-              type={this.state.visible ? "text" : "password"}
-              value={user.confirm_password}
-              onChange={(e) => set_user_confirm_password(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={this.handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                  >
-                    {this.state.visible ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            <FilledInput
-              style={{
-                width: "100%",
-                height: "2.5rem",
-                marginBottom: "0.6rem",
-              }}
-              placeholder="Campus Access ID/Refer Code"
-              id="standard-adornment-email"
-              variant="filled"
-              type="text"
-              value={user.campus_id}
-              onChange={(e) => set_user_campus_id(e.target.value)}
-            />
-            <small>By registering, you agree to the Terms & condition</small>
-            <Button
-              fullWidth
-              style={{ backgroundColor: "#3c5a5f", color: "#eee" }}
-              onClick={() => {
-                signup(user);
+          <FilledInput
+            style={{
+              width: "100%",
+              height: "2.5rem",
+              marginBottom: "0.6rem",
+            }}
+            placeholder="Full Name"
+            id="standard-adornment-email"
+            variant="filled"
+            type="text"
+            value={user.name}
+            onChange={(e) => set_user_name(e.target.value)}
+          />
+          <FilledInput
+            style={{
+              width: "100%",
+              height: "2.5rem",
+              marginBottom: "0.6rem",
+            }}
+            placeholder="Email"
+            id="standard-adornment-email"
+            variant="filled"
+            type="email"
+            value={user.email}
+            onChange={(e) => set_user_email(e.target.value)}
+          />
+          <FilledInput
+            style={{
+              width: "100%",
+              height: "2.5rem",
+              marginBottom: "0.6rem",
+            }}
+            placeholder="Phone Number"
+            id="standard-adornment-email"
+            variant="filled"
+            type="text"
+            value={user.contact_num}
+            onChange={(e) => set_user_contact_num(e.target.value)}
+          />
+          <FilledInput
+            style={{ width: "100%", height: "2.5rem", marginBottom: "1rem" }}
+            placeholder="Password"
+            id="standard-adornment-password"
+            variant="filled"
+            type={visible ? "text" : "password"}
+            value={user.password}
+            onChange={(e) => set_user_password(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                >
+                  {visible ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+          <FilledInput
+            style={{ width: "100%", height: "2.5rem", marginBottom: "1rem" }}
+            placeholder="Confirm Password"
+            id="standard-adornment-password"
+            variant="filled"
+            type={visible ? "text" : "password"}
+            value={user.confirm_password}
+            onChange={(e) => set_user_confirm_password(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                >
+                  {visible ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+          <FilledInput
+            style={{
+              width: "100%",
+              height: "2.5rem",
+              marginBottom: "0.6rem",
+            }}
+            placeholder="Campus Access ID/Refer Code"
+            id="standard-adornment-email"
+            variant="filled"
+            type="text"
+            value={user.campus_id}
+            onChange={(e) => set_user_campus_id(e.target.value)}
+          />
+          <small>By registering, you agree to the Terms & condition</small>
+          <Button
+            fullWidth
+            style={{ backgroundColor: "#3c5a5f", color: "#eee" }}
+            onClick={() => {
+              signup(user);
 
-                this.setState({ edit_modal: false });
-              }}
-            >
-              {" "}
-              Register as Candidate
-            </Button>
-            <p>Already have an account? Login</p>
-          </div>
-        </Dialog>
-        <Loader {...this.props} />
-      </div>
-    );
-  }
-}
+              setEditModal(false);
+            }}
+          >
+            {" "}
+            Register as Candidate
+          </Button>
+          <p>Already have an account? Login</p>
+        </div>
+      </Dialog>
+      <Loader {...props} />
+    </div>
+  );
+};
+
+export default Header;

@@ -1,4 +1,3 @@
-import { Component } from "react";
 import Dashboard from "../../pages/Dashboard";
 import { set_snackbar_status } from "../../actions/snackbar/snackbarActions";
 import { get_all_users } from "../../actions/user/userActions";
@@ -17,11 +16,9 @@ import {
   reset_post,
 } from "../../actions/posts/postActions";
 
-class DashboardCont extends Component {
-  render() {
-    return <Dashboard {...this.props} />;
-  }
-}
+const DashboardCont = (props) => {
+  return <Dashboard {...props} />;
+};
 
 const mapStateToProps = (store) => {
   return {

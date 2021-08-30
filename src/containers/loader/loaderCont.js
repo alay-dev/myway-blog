@@ -1,13 +1,10 @@
-import { Component } from "react";
 import Loader from "../../components/Loader";
 // import {} from "../../actions/login/loginActions";
 import { connect } from "react-redux";
 
-class LoaderCont extends Component {
-  render() {
-    return <Loader {...this.props} />;
-  }
-}
+const LoaderCont = (props) => {
+  return <Loader {...props} />;
+};
 
 const mapStateToProps = (store) => {
   return {

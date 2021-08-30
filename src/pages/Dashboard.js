@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import UserSection from "../components/UserSection";
 import AdminSection from "../components/AdminSection";
@@ -6,37 +6,29 @@ import AdminSection from "../components/AdminSection";
 import "../css/dashboard.css";
 import PostSection from "../components/PostSection";
 
-export default class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { section: "post" };
-  }
-  componentDidMount() {
-    console.log(this.props);
-    this.props.get_all_users(this.props.login);
-  }
+const Dashboard = (props) => {
+  const [section, setSection] = useState("post");
+  useEffect(() => {
+    props.get_all_users(props.login);
+  }, []);
 
-  render() {
-    return (
-      <div className="dashboard">
-        <Sidebar
-          {...this.props}
-          setSection={(value) => {
-            this.setState({ section: value });
-          }}
-          section={this.state.section}
-        />
-        <div className="main">
-          {this.state.section === "post" ? <PostSection {...this.props} /> : ""}
-          {this.state.section === "user" ? <UserSection {...this.props} /> : ""}
-          {this.state.section === "admin" ? (
-            <AdminSection {...this.props} />
-          ) : (
-            ""
-          )}
-        </div>
-        {/* <SnackBar {...this.props} /> */}
+  return (
+    <div className="dashboard">
+      <Sidebar
+        {...props}
+        setSection={(value) => {
+          setSection(value);
+        }}
+        section={section}
+      />
+      <div className="main">
+        {section === "post" ? <PostSection {...props} /> : ""}
+        {section === "user" ? <UserSection {...props} /> : ""}
+        {section === "admin" ? <AdminSection {...props} /> : ""}
       </div>
-    );
-  }
-}
+      {/* <SnackBar {...this.props} /> */}
+    </div>
+  );
+};
+
+export default Dashboard;

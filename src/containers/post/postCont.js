@@ -1,15 +1,12 @@
-import { Component } from "react";
 import Post from "../../pages/Post";
 import { set_snackbar_status } from "../../actions/snackbar/snackbarActions";
 import { get_post_by_id } from "../../actions/posts/postActions";
 import { add_comment, set_comment } from "../../actions/comment/commentAction";
 import { connect } from "react-redux";
 
-class HomeCont extends Component {
-  render() {
-    return <Post {...this.props} />;
-  }
-}
+const HomeCont = (props) => {
+  return <Post {...props} />;
+};
 
 const mapStateToProps = (store) => {
   return {
